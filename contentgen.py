@@ -1,7 +1,6 @@
 from llm_helper import llm
 import re
 
-# 🔹 Add this function at the top
 def extract_language(query):
     query_lower = query.lower()
 
@@ -12,7 +11,7 @@ def extract_language(query):
     elif "in english" in query_lower:
         return "english"
 
-    # 🔹 Check Devanagari script (Marathi/Hindi)
+    # Check Devanagari script (Marathi/Hindi)
     elif re.search(r'[\u0900-\u097F]', query):
         # Marathi-specific words
         if any(word in query for word in ["काय", "म्हणजे", "का", "कसा"]):
@@ -22,14 +21,14 @@ def extract_language(query):
         if any(word in query for word in ["क्या", "कैसे", "क्यों", "कब"]):
             return "hindi"
 
-        # Default Devanagari → Marathi (safer for your project)
+        # Default Devanagari → Marathi 
         return "marathi"
 
-    # 🔹 Roman Marathi
+    # Roman Marathi
     elif any(word in query_lower for word in ["mhanje", "kay", "kasa", "kuthe"]):
         return "marathi"
 
-    # 🔹 Roman Hindi
+    # Roman Hindi
     elif any(word in query_lower for word in ["kya", "kaise", "kyu", "kab"]):
         return "hindi"
 
@@ -77,14 +76,14 @@ def clean_response(text):
 
 def generate_answer(question):
 
-    # 🔥 Step 1: extract language (explicit + detection)
+    # Step 1: extract language (explicit + detection)
     language = extract_language(question)
 
-    # 🔥 Step 2: fallback to english if None
+    # Step 2: fallback to english if None
     if not language:
         language = "english"
 
-    # 🔥 Step 3: clean question
+    # Step 3: clean question
     cleaned_question = clean_query(question)
 
     prompt = get_prompt(cleaned_question, language)
@@ -93,11 +92,6 @@ def generate_answer(question):
     cleaned_output = clean_response(response.content)
 
     return cleaned_output
-    #
-    # response = llm.invoke(prompt)
-    #
-    # return getattr(response, "content", str(response))
-
 
 if __name__ == '__main__':
     post = generate_answer("What is the brain of the computer? in english")
