@@ -6,7 +6,7 @@ from langchain_core.exceptions import OutputParserException
 from llm_helper import llm
 
 
-# 🔹 Clean text (keep this)
+# Clean text
 def clean_text(text):
     if not isinstance(text, str):
         return ""
@@ -17,7 +17,7 @@ def clean_text(text):
     return text.strip()
 
 
-# 🔹 Main processing function (UPDATED)
+# Main processing function
 def process_posts(raw_file_path, processed_file_path="data/processed_posts.json"):
     enriched_posts = []
 
@@ -43,7 +43,7 @@ def process_posts(raw_file_path, processed_file_path="data/processed_posts.json"
         json.dump(enriched_posts, outfile, indent=4, ensure_ascii=False)
 
 
-# 🔥 NEW: Convert text → structured Q&A format
+# Convert text → structured Q&A format
 def generate_learning_content(text):
     template = """
     Convert the following content into a simple educational format for students.
@@ -74,7 +74,7 @@ def generate_learning_content(text):
         parser = JsonOutputParser()
         return parser.parse(response.content)
     except OutputParserException:
-        # fallback (important for stability)
+        # fallback
         return {
             "question": "Explain this topic",
             "answer": text,
@@ -82,7 +82,7 @@ def generate_learning_content(text):
         }
 
 
-# 🔹 Handle messy LLM output
+# Handle messy LLM output
 def extract_llm_content(text):
     try:
         data = json.loads(text)
