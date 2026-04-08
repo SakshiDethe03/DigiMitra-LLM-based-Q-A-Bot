@@ -7,6 +7,7 @@ The project leverages Large Language Models (LLMs) along with structured data to
 <h4>🚀 Features</h4>
 <ul>
   <li>💡 Domain-specific Q&A (Computer-related topics only)</li>
+  <li>🌐 Supports multiple languages: English, Marathi, and Hindi</li>
   <li>🤖 Powered by OpenAI LLM</li>
   <li>🔗 Built using LangChain framework</li>
   <li>📚 Uses structured JSON datasets for guided responses</li>
@@ -14,6 +15,15 @@ The project leverages Large Language Models (LLMs) along with structured data to
   <li>🎯 Controlled output to avoid irrelevant responses</li>
 </ul>
 
+<h4>🌍 Language Support</h4>
+
+DigiMitra supports multilingual interaction, allowing users to ask questions and receive answers in:
+ <ul>
+   <li>English</li>
+   <li>Marathi</li>
+   <li>Hindi</li>
+ </ul>
+ 
 <h4>🛠️ Tech Stack</h4>
 <ul>
   <li>Language: Python</li>
